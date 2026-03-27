@@ -18,7 +18,7 @@ export function renderHome(container: HTMLElement) {
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-md);">
         <div>
           <h1 style="font-size:var(--text-2xl);font-weight:700;">码途</h1>
-          <p style="font-size:var(--text-sm);color:var(--text-secondary);">CodeQuest</p>
+          <p style="font-size:var(--text-sm);color:var(--text-secondary);">用游戏学会Claude Code</p>
         </div>
         <div style="display:flex;gap:var(--space-md);align-items:center;">
           <button class="btn btn-secondary" id="btn-glossary" style="font-size:var(--text-sm);padding:var(--space-xs) var(--space-md);">📖 词典</button>
@@ -40,8 +40,8 @@ export function renderHome(container: HTMLElement) {
 
       <!-- Review Queue -->
       ${reviewCount > 0 ? `
-        <button class="btn btn-gold btn-block" id="btn-review" style="margin:var(--space-md) 0;animation:pulse 2s infinite;">
-          复习 · ${reviewCount}个词 Review Queue
+        <button class="btn btn-gold btn-block" id="btn-review" style="margin:var(--space-md) 0;">
+          复习 · ${reviewCount}个待复习 Review ${reviewCount} items
         </button>
       ` : ''}
 
@@ -51,8 +51,11 @@ export function renderHome(container: HTMLElement) {
         ${WORLDS.map(w => {
           const unlocked = state.isWorldUnlocked(w.id);
           const completion = state.getWorldCompletion(w.id);
+          const isNext = unlocked && completion < 100;
           return `
-            <div class="card ${unlocked ? '' : 'locked'}" data-world="${w.id}"
+            <div class="card ${unlocked ? '' : 'locked'} ${isNext ? 'card-highlight' : ''}" data-world="${w.id}"
+                 role="${unlocked ? 'button' : 'presentation'}" tabindex="${unlocked ? '0' : '-1'}"
+                 aria-label="${w.zh} ${w.en}${unlocked ? ` ${completion}%` : ' 已锁定'}"
                  style="display:flex;align-items:center;gap:var(--space-md);position:relative;z-index:1;${!unlocked ? 'opacity:0.4;' : ''}cursor:${unlocked ? 'pointer' : 'default'};">
               <div style="width:56px;height:56px;border-radius:var(--radius-full);background:${unlocked ? w.color : 'var(--bg-secondary)'};display:flex;align-items:center;justify-content:center;font-size:var(--text-2xl);flex-shrink:0;">
                 ${unlocked ? w.icon : '🔒'}
@@ -64,8 +67,8 @@ export function renderHome(container: HTMLElement) {
                   <div class="progress-bar" style="margin-top:var(--space-xs);">
                     <div class="progress-bar-fill" style="width:${completion}%"></div>
                   </div>
-                  <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px;">${completion}%</div>
-                ` : '<div style="font-size:var(--text-xs);color:var(--text-muted);">完成上一个世界解锁</div>'}
+                  <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px;">${completion}% 完成</div>
+                ` : '<div style="font-size:var(--text-xs);color:var(--text-muted);">完成上一世界后解锁 Complete previous world</div>'}
               </div>
             </div>
           `;
@@ -74,14 +77,16 @@ export function renderHome(container: HTMLElement) {
     </div>
   `;
 
-  // Events
+  // Events — click + keyboard for world cards
   container.querySelectorAll('[data-world]').forEach(el => {
-    el.addEventListener('click', () => {
+    const handler = () => {
       const wid = el.getAttribute('data-world');
       if (wid && state.isWorldUnlocked(parseInt(wid))) {
         router.navigate(`/world/${wid}`);
       }
-    });
+    };
+    el.addEventListener('click', handler);
+    el.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Enter') handler(); });
   });
 
   container.querySelector('#btn-glossary')?.addEventListener('click', () => router.navigate('/glossary'));

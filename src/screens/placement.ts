@@ -16,11 +16,17 @@ export function renderPlacement(container: HTMLElement) {
       <div class="screen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-lg);">
         ${renderMascot('firstLogin')}
         <h2 style="text-align:center;">让我看看你已经知道多少！</h2>
-        <p style="color:var(--text-secondary);text-align:center;">10道题，看看你对Claude Code了解多少</p>
+        <p style="color:var(--text-secondary);text-align:center;">10道题，帮你找到最合适的起点</p>
         <button class="btn btn-primary btn-block" id="start-placement">开始测试 Start Test</button>
+        <button class="btn btn-secondary btn-block" id="skip-placement" style="font-size:var(--text-sm);">我是新手，从头开始 I'm a beginner</button>
       </div>
     `;
     container.querySelector('#start-placement')?.addEventListener('click', () => showQuestion());
+    container.querySelector('#skip-placement')?.addEventListener('click', () => {
+      state.completePlacement(0);
+      state.updateStreak();
+      router.navigate('/');
+    });
   }
 
   function showQuestion() {

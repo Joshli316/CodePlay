@@ -9,7 +9,7 @@ export function renderMascot(trigger: string, expressionOverride?: string): stri
     if (typeof entry === 'string') {
       dialogue = entry;
     } else if (Array.isArray(entry)) {
-      dialogue = entry[0];
+      dialogue = entry[Math.floor(Math.random() * entry.length)];
     }
   }
 

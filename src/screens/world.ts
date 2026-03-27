@@ -21,7 +21,9 @@ export function renderWorld(container: HTMLElement, worldId: number) {
           const completed = worldState?.levelsCompleted.includes(i);
           const stars = worldState?.stars[i] || 0;
           return `
-            <div class="card" data-level="${i}" style="${!unlocked ? 'opacity:0.4;pointer-events:none;' : 'cursor:pointer;'}">
+            <div class="card" data-level="${i}" role="${unlocked ? 'button' : 'presentation'}" tabindex="${unlocked ? '0' : '-1'}"
+                 aria-label="${level.title_zh} ${level.title_en}${unlocked ? ` ${stars}星` : ' 已锁定'}"
+                 style="${!unlocked ? 'opacity:0.4;pointer-events:none;' : 'cursor:pointer;'}">
               <div style="display:flex;align-items:center;gap:var(--space-md);">
                 <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;font-size:var(--text-xl);">
                   ${unlocked ? level.icon : '🔒'}
@@ -42,12 +44,14 @@ export function renderWorld(container: HTMLElement, worldId: number) {
   `;
 
   container.querySelectorAll('[data-level]').forEach(el => {
-    el.addEventListener('click', () => {
+    const handler = () => {
       const levelIdx = parseInt(el.getAttribute('data-level') || '0');
       const level = levels[levelIdx];
       if (level && state.isLevelUnlocked(worldId, levelIdx)) {
         router.navigate(`/game/${level.gameType}/${worldId}/${levelIdx}`);
       }
-    });
+    };
+    el.addEventListener('click', handler);
+    el.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Enter') handler(); });
   });
 }

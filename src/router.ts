@@ -41,6 +41,9 @@ class Router {
             params[name] = match[i + 1];
           });
           route.handler(params);
+          // Move focus to app container after navigation for keyboard/screen reader users
+          const app = document.getElementById('app');
+          if (app) { app.setAttribute('tabindex', '-1'); app.focus({ preventScroll: true }); }
           return;
         }
       }
