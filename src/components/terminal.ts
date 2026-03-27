@@ -52,7 +52,8 @@ export function initTerminal(container: HTMLElement): void {
     if (isCommand) {
       line.textContent = `$ ${text}`;
     } else {
-      line.innerHTML = text;
+      line.textContent = text.replace(/<br>/g, '\n');
+      line.style.whiteSpace = 'pre-wrap';
     }
     output.appendChild(line);
     output.scrollTop = output.scrollHeight;
