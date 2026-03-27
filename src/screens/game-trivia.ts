@@ -44,6 +44,8 @@ export function renderTrivia(container: HTMLElement, worldId: number, levelIndex
   let currentIndex = 0;
   let correctCount = 0;
   let timerInterval: ReturnType<typeof setInterval> | null = null;
+  let totalTimeUsed = 0;
+  const totalTimeAvailable = TOTAL * TIME_PER_QUESTION * 10;
 
   function clearTimer() {
     if (timerInterval) {
@@ -56,12 +58,14 @@ export function renderTrivia(container: HTMLElement, worldId: number, levelIndex
     clearTimer();
 
     if (currentIndex >= questions.length) {
+      const timeRemainingPct = Math.round(((totalTimeAvailable - totalTimeUsed) / totalTimeAvailable) * 100);
       renderResults(container, {
         worldId,
         levelIndex,
         score: correctCount,
         total: questions.length,
         gameType: 'trivia',
+        timeRemainingPct,
       });
       return;
     }
@@ -123,6 +127,7 @@ export function renderTrivia(container: HTMLElement, worldId: number, levelIndex
 
     function showResult(correct: boolean, prefix = '') {
       clearTimer();
+      totalTimeUsed += (TIME_PER_QUESTION * 10) - timeLeft;
       const feedback = container.querySelector('#feedback') as HTMLElement;
       feedback.style.display = 'block';
       if (correct) {
