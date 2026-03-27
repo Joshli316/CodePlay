@@ -49,7 +49,7 @@ export const WORLD_LEVELS: Record<number, LevelDef[]> = {
     { title_zh: '每日任务', title_en: 'Daily Mission', gameType: 'daily-mission', icon: '📋' },
     { title_zh: '好友挑战', title_en: 'Peer Challenge', gameType: 'peer-challenge', icon: '🤝' },
     { title_zh: '终极Boss', title_en: 'Final Boss', gameType: 'boss-battle', icon: '👹' },
-    { title_zh: '毕业证书', title_en: 'Certificate', gameType: 'boss-battle', icon: '🎓' },
+    { title_zh: '毕业证书', title_en: 'Certificate', gameType: 'certificate', icon: '🎓' },
   ],
 };
 

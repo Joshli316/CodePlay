@@ -17,6 +17,7 @@ import { renderPromptDuel } from './screens/game-prompt-duel';
 import { renderBossBattle } from './screens/game-boss-battle';
 import { renderDailyMission } from './screens/game-daily-mission';
 import { renderPeerChallenge } from './screens/game-peer-challenge';
+import { renderCertificate } from './screens/game-certificate';
 
 const app = document.getElementById('app')!;
 
@@ -32,6 +33,7 @@ const GAME_RENDERERS: Record<string, (container: HTMLElement, worldId: number, l
   'boss-battle': renderBossBattle,
   'daily-mission': renderDailyMission,
   'peer-challenge': renderPeerChallenge,
+  'certificate': renderCertificate,
 };
 
 // Routes
