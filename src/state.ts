@@ -1,3 +1,5 @@
+import { getWorldLevelCount as _getWorldLevelCount } from './data/worlds';
+
 export interface WorldProgress {
   levelsCompleted: number[];
   scores: Record<number, number>;
@@ -112,8 +114,7 @@ class StateManager {
   }
 
   getWorldLevelCount(worldId: number): number {
-    const counts: Record<number, number> = { 1: 4, 2: 6, 3: 6, 4: 6 };
-    return counts[worldId] || 4;
+    return _getWorldLevelCount(worldId);
   }
 
   isLevelUnlocked(worldId: number, levelIndex: number): boolean {

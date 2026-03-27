@@ -2,7 +2,7 @@ import { state } from '../state';
 import { renderHeader } from '../components/header';
 import { playSound } from '../components/audio';
 import { renderResults } from './results';
-import { shuffle } from '../utils';
+import { shuffle, renderScoreBar, renderFeedback } from '../utils';
 
 interface Puzzle {
   task_zh: string;
@@ -70,13 +70,7 @@ export function renderDragDrop(container: HTMLElement, worldId: number, levelInd
       container.innerHTML = `
         ${renderHeader('流程排序 Drag & Drop', true)}
         <div class="game-screen">
-          <div class="game-score-bar">
-            <span>${progress}/${TOTAL}</span>
-            <span>✓ ${correctCount}</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-bar-fill" style="width:${(progress / TOTAL) * 100}%"></div>
-          </div>
+          ${renderScoreBar(progress, TOTAL, correctCount)}
           <div class="game-question">
             ${puzzle.task_zh}
             <div class="game-question-sub">${puzzle.task_en}</div>
@@ -147,19 +141,10 @@ export function renderDragDrop(container: HTMLElement, worldId: number, levelInd
         if (isCorrect) {
           correctCount++;
           playSound('correct');
-          feedback.innerHTML = `
-            <div style="padding:var(--space-md);border-radius:var(--radius-md);background:rgba(0,212,170,0.1);border:1px solid var(--green);text-align:center;line-height:1.6;">
-              <strong>正确！ Correct!</strong><br>完美的流程顺序！
-            </div>
-          `;
+          feedback.innerHTML = renderFeedback(true, '<strong>正确！ Correct!</strong><br>完美的流程顺序！');
         } else {
           playSound('wrong');
-          feedback.innerHTML = `
-            <div style="padding:var(--space-md);border-radius:var(--radius-md);background:rgba(255,107,107,0.1);border:1px solid var(--red);line-height:1.6;font-size:var(--text-sm);">
-              <strong>正确顺序 Correct order:</strong><br>
-              ${puzzle.steps.map((s, i) => `${i + 1}. ${s}`).join('<br>')}
-            </div>
-          `;
+          feedback.innerHTML = renderFeedback(false, `<strong>正确顺序 Correct order:</strong><br>${puzzle.steps.map((s, i) => `${i + 1}. ${s}`).join('<br>')}`);
         }
 
         // Replace footer with next button

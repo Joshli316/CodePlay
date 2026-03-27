@@ -1,13 +1,7 @@
 import { state } from '../state';
 import { renderMascot } from '../components/mascot';
 import { router } from '../router';
-
-const WORLDS = [
-  { id: 1, zh: '终端之门', en: 'The Terminal Gate', icon: '🚪', color: '#00d4aa' },
-  { id: 2, zh: '命令王国', en: 'Command Kingdom', icon: '⚔️', color: '#ffc857' },
-  { id: 3, zh: '提示宫殿', en: 'Prompt Palace', icon: '🏰', color: '#ff6b6b' },
-  { id: 4, zh: '智能体擂台', en: 'Agent Arena', icon: '🤖', color: '#a78bfa' },
-];
+import { WORLDS } from '../data/worlds';
 
 export function renderHome(container: HTMLElement) {
   const streak = state.getStreak();

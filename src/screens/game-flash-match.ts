@@ -3,7 +3,7 @@ import { renderHeader } from '../components/header';
 import { playSound } from '../components/audio';
 import { vocabulary } from '../data/vocabulary';
 import { renderResults } from './results';
-import { shuffle } from '../utils';
+import { shuffle, renderScoreBar } from '../utils';
 
 export function renderFlashMatch(container: HTMLElement, worldId: number, levelIndex: number) {
   const TOTAL = 10;
@@ -34,13 +34,7 @@ export function renderFlashMatch(container: HTMLElement, worldId: number, levelI
     container.innerHTML = `
       ${renderHeader('词卡练习 Flash Match', true)}
       <div class="game-screen">
-        <div class="game-score-bar">
-          <span>${progress}/${TOTAL}</span>
-          <span>✓ ${knownCount}</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-bar-fill" style="width:${(progress / TOTAL) * 100}%"></div>
-        </div>
+        ${renderScoreBar(progress, TOTAL, knownCount)}
         <div class="game-instruction">点击卡片翻转 / Tap to flip</div>
         <div class="game-body" style="align-items:center;justify-content:center;flex:1;">
           <div class="flip-card" id="flashcard">
