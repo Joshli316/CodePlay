@@ -1,0 +1,26 @@
+import { mascotDialogue } from '../data/mascot-dialogue';
+
+export function renderMascot(trigger: string, expressionOverride?: string): string {
+  let dialogue = '';
+  const expression = expressionOverride || 'neutral';
+
+  const entry = mascotDialogue[trigger];
+  if (entry) {
+    if (typeof entry === 'string') {
+      dialogue = entry;
+    } else if (Array.isArray(entry)) {
+      dialogue = entry[0];
+    }
+  }
+
+  if (!dialogue) {
+    dialogue = '你好！我是码小码，你的编程小伙伴！';
+  }
+
+  return `
+    <div class="mascot-container">
+      <div class="mascot-avatar" style="font-size:var(--text-3xl);">🤖</div>
+      <div class="mascot-bubble">${dialogue}</div>
+    </div>
+  `;
+}

@@ -1,0 +1,13 @@
+{
+  "name": "codequest",
+  "version": "1.0.0",
+  "description": "CodeQuest 码途 — Duolingo-style bilingual Claude Code learning app",
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --outfile=dist/bundle.js --format=esm --target=es2020 --minify && cp index.html dist/ && cp -r src/styles dist/ && cp -r assets dist/",
+    "dev": "esbuild src/main.ts --bundle --outfile=dist/bundle.js --format=esm --target=es2020 --watch --servedir=dist"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.0",
+    "typescript": "^5.4.0"
+  }
+}
