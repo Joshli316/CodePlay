@@ -1,4 +1,4 @@
-# CodeQuest 码途
+# CodePlay 码玩
 
 Duolingo-style bilingual (English/Chinese) gamified learning app that teaches Chinese international students how to use Claude Code — from terminal basics to job-interview-ready fluency.
 

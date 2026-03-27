@@ -1,5 +1,5 @@
 export const mascotDialogue: Record<string, string | string[]> = {
-  firstLogin: '欢迎来到码途！我是码小码，你的AI编程伙伴。一起学Claude Code吧！',
+  firstLogin: '欢迎来到码玩！我是码小码，你的AI编程伙伴。一起学Claude Code吧！',
   wrongAnswer: [
     '没关系，再试一次！这个词很多人都会搞混。',
     '不要灰心，错误是学习的一部分！',

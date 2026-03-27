@@ -17,7 +17,7 @@ export function renderHome(container: HTMLElement) {
       <!-- Header area -->
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-md);">
         <div>
-          <h1 style="font-size:var(--text-2xl);font-weight:700;">码途</h1>
+          <h1 style="font-size:var(--text-2xl);font-weight:700;">码玩</h1>
           <p style="font-size:var(--text-sm);color:var(--text-secondary);">用游戏学会Claude Code</p>
         </div>
         <div style="display:flex;gap:var(--space-md);align-items:center;">
