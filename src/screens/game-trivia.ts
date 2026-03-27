@@ -123,7 +123,7 @@ export function renderTrivia(container: HTMLElement, worldId: number, levelIndex
 
     router.setCleanup(() => clearTimer());
 
-    function handleAnswer(correct: boolean) {
+    function showResult(correct: boolean, prefix = '') {
       clearTimer();
       const feedback = container.querySelector('#feedback') as HTMLElement;
       feedback.style.display = 'block';
@@ -133,7 +133,7 @@ export function renderTrivia(container: HTMLElement, worldId: number, levelIndex
       } else {
         const term = vocabulary.find(v => v.en === q.options[q.correctIndex]);
         if (term) state.addToReviewQueue({ id: term.id, type: 'vocab' });
-        feedback.innerHTML = renderFeedback(false, `<strong>正确答案: ${q.options[q.correctIndex]}</strong><br>${q.explanation}`);
+        feedback.innerHTML = renderFeedback(false, `<strong>${prefix}正确答案: ${q.options[q.correctIndex]}</strong><br>${q.explanation}`);
       }
       setTimeout(() => { currentIndex++; renderQuestion(); }, 2500);
     }
@@ -141,20 +141,14 @@ export function renderTrivia(container: HTMLElement, worldId: number, levelIndex
     function handleTimeout() {
       clearTimer();
       const btns = container.querySelectorAll('.option-btn');
-      btns.forEach(b => b.classList.add('disabled'));
-      btns.forEach((b, i) => { if (i === q.correctIndex) b.classList.add('correct'); });
+      btns.forEach((b, i) => { b.classList.add('disabled'); if (i === q.correctIndex) b.classList.add('correct'); });
       playSound('wrong');
-      const feedback = container.querySelector('#feedback') as HTMLElement;
-      feedback.style.display = 'block';
-      feedback.innerHTML = renderFeedback(false, `<strong>时间到！ Time's up! 正确答案: ${q.options[q.correctIndex]}</strong><br>${q.explanation}`);
-      const term = vocabulary.find(v => v.en === q.options[q.correctIndex]);
-      if (term) state.addToReviewQueue({ id: term.id, type: 'vocab' });
-      setTimeout(() => { currentIndex++; renderQuestion(); }, 2500);
+      showResult(false, "时间到！ Time's up! ");
     }
 
     setupQuizOptions(container, q.correctIndex,
-      () => handleAnswer(true),
-      () => handleAnswer(false),
+      () => showResult(true),
+      () => showResult(false),
     );
   }
 
