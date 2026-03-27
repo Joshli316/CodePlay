@@ -1,9 +1,9 @@
 import { state } from '../state';
 
-export function renderHeader(title: string, showBack?: boolean): string {
+export function renderHeader(title: string, showBack?: boolean, backPath?: string): string {
   const streak = state.getStreak();
   const backBtn = showBack
-    ? `<button class="header-back" onclick="window.location.hash='/'">←</button>`
+    ? `<button class="header-back" aria-label="返回 Go back" onclick="window.location.hash='${backPath || '/'}'">←</button>`
     : '';
 
   return `

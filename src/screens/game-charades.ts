@@ -4,15 +4,7 @@ import { playSound } from '../components/audio';
 import { commands } from '../data/commands';
 import { renderTerminal, initTerminal } from '../components/terminal';
 import { renderResults } from './results';
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+import { shuffle } from '../utils';
 
 export function renderCharades(container: HTMLElement, worldId: number, levelIndex: number) {
   const TOTAL = 8;

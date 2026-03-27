@@ -19,7 +19,7 @@ export function renderMascot(trigger: string, expressionOverride?: string): stri
 
   return `
     <div class="mascot-container">
-      <div class="mascot-avatar" style="font-size:var(--text-3xl);">🤖</div>
+      <div class="mascot-avatar" aria-label="码小码" style="font-size:var(--text-3xl);">🤖</div>
       <div class="mascot-bubble">${dialogue}</div>
     </div>
   `;

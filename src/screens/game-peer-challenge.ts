@@ -4,15 +4,7 @@ import { renderMascot } from '../components/mascot';
 import { playSound } from '../components/audio';
 import { quizzes } from '../data/quizzes';
 import { renderResults } from './results';
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+import { shuffle } from '../utils';
 
 function getAllQuestions() {
   const all: typeof quizzes[1] = [];

@@ -116,11 +116,12 @@ export function showHongbao(): void {
 
   // Dismiss on click or after 3 seconds
   const dismiss = () => {
+    clearTimeout(autoDismissTimer);
     overlay.style.opacity = '0';
     overlay.style.transition = 'opacity 0.3s';
     setTimeout(() => overlay.remove(), 300);
   };
 
   overlay.addEventListener('click', dismiss);
-  setTimeout(dismiss, 3000);
+  const autoDismissTimer = setTimeout(dismiss, 3000);
 }

@@ -17,9 +17,11 @@ export function renderGlossary(container: HTMLElement) {
     container.innerHTML = `
       ${renderHeader('词典 Glossary', true)}
       <div class="screen">
+        <label for="glossary-search" class="sr-only">搜索词条 Search terms</label>
         <input type="text" class="search-input" id="glossary-search" placeholder="搜索 Search (English, 拼音, 中文)" value="${searchTerm}">
         <p style="color:var(--text-muted);font-size:var(--text-xs);margin:var(--space-sm) 0;">${filtered.length} 个词条</p>
         <div style="display:flex;flex-direction:column;gap:var(--space-sm);margin-top:var(--space-sm);">
+          ${filtered.length === 0 ? '<div style="text-align:center;color:var(--text-muted);padding:var(--space-xl) 0;">没有找到匹配的词条 No matching terms found</div>' : ''}
           ${filtered.map(v => {
             const worldUnlocked = state.isWorldUnlocked(v.world);
             return `

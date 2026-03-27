@@ -3,6 +3,7 @@ import { renderHeader } from '../components/header';
 import { renderMascot } from '../components/mascot';
 import { playSound } from '../components/audio';
 import { renderResults } from './results';
+import { shuffle } from '../utils';
 
 interface BossScenario {
   question_zh: string;
@@ -56,15 +57,6 @@ const ALL_SCENARIOS: BossScenario[] = [
     keywords: ['refactor', 'simplify', 'clean'],
   },
 ];
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 export function renderBossBattle(container: HTMLElement, worldId: number, levelIndex: number) {
   const TOTAL_SCENARIOS = 3;

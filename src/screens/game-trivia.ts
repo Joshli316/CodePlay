@@ -1,8 +1,10 @@
 import { state } from '../state';
+import { router } from '../router';
 import { renderHeader } from '../components/header';
 import { playSound } from '../components/audio';
 import { vocabulary } from '../data/vocabulary';
 import { renderResults } from './results';
+import { shuffle } from '../utils';
 
 interface TriviaQuestion {
   question_zh: string;
@@ -10,15 +12,6 @@ interface TriviaQuestion {
   options: string[];
   correctIndex: number;
   explanation: string;
-}
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
 }
 
 function generateQuestionsFromVocab(worldId: number, count: number): TriviaQuestion[] {
@@ -48,13 +41,7 @@ export function renderTrivia(container: HTMLElement, worldId: number, levelIndex
 
   let questions: TriviaQuestion[] = [];
 
-  // Try dynamic import of quizzes; fall back to vocab-generated
-  try {
-    // quizzes may not exist yet — use vocab-based fallback
-    questions = generateQuestionsFromVocab(worldId, TOTAL);
-  } catch {
-    questions = generateQuestionsFromVocab(worldId, TOTAL);
-  }
+  questions = generateQuestionsFromVocab(worldId, TOTAL);
 
   let currentIndex = 0;
   let correctCount = 0;
@@ -133,6 +120,8 @@ export function renderTrivia(container: HTMLElement, worldId: number, levelIndex
         handleAnswer(-1); // time's up
       }
     }, 100);
+
+    router.setCleanup(() => clearTimer());
 
     // Option clicks
     const optionBtns = container.querySelectorAll('.option-btn');

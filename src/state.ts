@@ -55,7 +55,16 @@ class StateManager {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const saved = JSON.parse(raw);
-        return { ...DEFAULT_STATE, ...saved };
+        return {
+          ...DEFAULT_STATE,
+          ...saved,
+          worlds: {
+            1: { levelsCompleted: [], scores: {}, stars: {}, ...(saved.worlds?.[1] || {}) },
+            2: { levelsCompleted: [], scores: {}, stars: {}, ...(saved.worlds?.[2] || {}) },
+            3: { levelsCompleted: [], scores: {}, stars: {}, ...(saved.worlds?.[3] || {}) },
+            4: { levelsCompleted: [], scores: {}, stars: {}, ...(saved.worlds?.[4] || {}) },
+          },
+        };
       }
     } catch (e) {
       console.warn('Failed to load state:', e);
@@ -120,7 +129,7 @@ class StateManager {
     const stars = score >= 100 ? 3 : score >= 70 ? 2 : score >= 40 ? 1 : 0;
     const prevStars = world.stars[levelIndex] || 0;
     world.stars[levelIndex] = Math.max(prevStars, stars);
-    this.state.totalScore += score;
+    this.state.totalScore += Math.max(0, score - prev);
     this.save();
   }
 
@@ -186,7 +195,7 @@ class StateManager {
   getDueReviewItems(limit = 10): ReviewItem[] {
     const threeDaysAgo = Date.now() - 3 * 86400000;
     return this.state.reviewQueue
-      .filter(item => item.lastSeen < threeDaysAgo || item.wrongCount > item.correctCount)
+      .filter(item => item.lastSeen < threeDaysAgo || item.wrongCount >= item.correctCount)
       .slice(0, limit);
   }
 

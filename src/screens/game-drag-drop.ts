@@ -2,6 +2,7 @@ import { state } from '../state';
 import { renderHeader } from '../components/header';
 import { playSound } from '../components/audio';
 import { renderResults } from './results';
+import { shuffle } from '../utils';
 
 interface Puzzle {
   task_zh: string;
@@ -36,15 +37,6 @@ const PUZZLES: Puzzle[] = [
     steps: ['理解现有逻辑 Understand logic', '编写测试 Write tests', '重构代码 Refactor', '运行测试 Run tests', '提交更改 Commit changes'],
   },
 ];
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 export function renderDragDrop(container: HTMLElement, worldId: number, levelIndex: number) {
   const TOTAL = 5;
