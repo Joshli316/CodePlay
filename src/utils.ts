@@ -16,13 +16,14 @@ export function renderFeedback(correct: boolean, message: string): string {
 
 /** Render a score bar showing progress and correct count. */
 export function renderScoreBar(current: number, total: number, correctCount: number): string {
+  const pct = Math.round((current / total) * 100);
   return `
     <div class="game-score-bar">
       <span>${current}/${total}</span>
       <span>✓ ${correctCount}</span>
     </div>
     <div class="progress-bar">
-      <div class="progress-bar-fill" style="width:${(current / total) * 100}%"></div>
+      <div class="progress-bar-fill" style="width:${pct}%"></div>
     </div>
   `;
 }

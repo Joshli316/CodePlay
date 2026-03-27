@@ -1,4 +1,4 @@
-import { getWorldLevelCount as _getWorldLevelCount } from './data/worlds';
+import { getWorldLevelCount as getWorldLevelCountFromData } from './data/worlds';
 
 export interface WorldProgress {
   levelsCompleted: number[];
@@ -114,7 +114,7 @@ class StateManager {
   }
 
   getWorldLevelCount(worldId: number): number {
-    return _getWorldLevelCount(worldId);
+    return getWorldLevelCountFromData(worldId);
   }
 
   isLevelUnlocked(worldId: number, levelIndex: number): boolean {

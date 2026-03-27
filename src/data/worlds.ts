@@ -58,6 +58,9 @@ export function getWorldLevelCount(worldId: number): number {
 }
 
 export function getWorldName(worldId: number): { zh: string; en: string } {
-  const w = WORLDS.find(w => w.id === worldId);
+  const w = WORLDS[worldId - 1];
   return w ? { zh: w.zh, en: w.en } : { zh: '未知', en: 'Unknown' };
 }
+
+/** Pre-computed world name lookup for templates */
+export const WORLD_NAMES_ZH: Record<number, string> = Object.fromEntries(WORLDS.map(w => [w.id, w.zh]));

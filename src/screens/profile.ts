@@ -2,7 +2,7 @@ import { state } from '../state';
 import { renderHeader } from '../components/header';
 import { renderBadge } from '../components/badge';
 import { badges } from '../data/badges';
-import { WORLDS } from '../data/worlds';
+import { WORLD_NAMES_ZH } from '../data/worlds';
 
 export function renderProfile(container: HTMLElement) {
   const s = state.get();
@@ -40,7 +40,7 @@ export function renderProfile(container: HTMLElement) {
       <div style="display:flex;flex-direction:column;gap:var(--space-sm);margin-bottom:var(--space-lg);">
         ${[1, 2, 3, 4].map(w => {
           const pct = state.getWorldCompletion(w);
-          const names: Record<number, string> = Object.fromEntries(WORLDS.map(w => [w.id, w.zh]));
+          const names = WORLD_NAMES_ZH;
           return `
             <div>
               <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);margin-bottom:var(--space-xs);">
