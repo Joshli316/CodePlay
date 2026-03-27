@@ -49,6 +49,7 @@ codequest/
 │   ├── components/
 │   │   ├── header.ts       # Top bar — back, title, streak
 │   │   ├── progress-bar.ts # Level progress indicator
+│   │   ├── icons.ts        # SVG icon system (Lucide-style, replaces emoji icons)
 │   │   ├── card.ts         # Reusable flashcard component
 │   │   ├── terminal.ts     # Simulated terminal sandbox (type command → see response)
 │   │   ├── mascot.ts       # 码小码 mascot with dialogue bubbles
@@ -87,3 +88,4 @@ codequest/
 - No external API calls — all content is bundled in data files
 - Mascot 码小码 has contextual Chinese dialogue (not just expressions) — speaks to the student like a companion
 - Completion certificates render client-side as HTML/CSS → canvas → downloadable PNG (no backend)
+- UI icons use SVG (src/components/icons.ts) — not emojis. Emojis only for mascot character and game-level content icons
