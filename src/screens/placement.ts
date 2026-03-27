@@ -13,7 +13,7 @@ export function renderPlacement(container: HTMLElement) {
   function showIntro() {
     container.innerHTML = `
       ${renderHeader('能力测试', false)}
-      <div class="screen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-lg);">
+      <div class="screen" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-lg);padding-top:calc(var(--header-height) + var(--space-xl));">
         ${renderMascot('firstLogin')}
         <h2 style="text-align:center;">让我看看你已经知道多少！</h2>
         <p style="color:var(--text-secondary);text-align:center;">10道题，帮你找到最合适的起点</p>

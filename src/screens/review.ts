@@ -15,7 +15,7 @@ export function renderReview(container: HTMLElement) {
   if (dueItems.length === 0) {
     container.innerHTML = `
       ${renderHeader('复习 Review', true)}
-      <div class="screen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-lg);">
+      <div class="screen" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-lg);padding-top:calc(var(--header-height) + var(--space-2xl));">
         ${renderMascot('correctAnswer')}
         <h2 style="text-align:center;">没有需要复习的内容！</h2>
         <p style="color:var(--text-secondary);text-align:center;">No items due for review. Keep learning!</p>

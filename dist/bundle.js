@@ -150,7 +150,7 @@ Daily limit: 78% remaining`},{id:"review",command:"/review",zhName:"\u4EE3\u7801
     </div>
   `}function P(e,t,n,l){let i=!1,s=e.querySelectorAll(".option-btn");s.forEach((o,a)=>{o.addEventListener("click",()=>{if(i)return;i=!0;let r=parseInt(o.dataset.index||String(a)),c=r===t;s.forEach((d,p)=>{d.classList.add("disabled"),p===t&&d.classList.add("correct"),d===o&&!c&&d.classList.add("wrong")}),C(c?"correct":"wrong"),(c?n:l)(r)})})}function de(e){let t=0,n=0;function l(){e.innerHTML=`
       ${w("\u80FD\u529B\u6D4B\u8BD5",!1)}
-      <div class="screen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-lg);">
+      <div class="screen" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-lg);padding-top:calc(var(--header-height) + var(--space-xl));">
         ${S("firstLogin")}
         <h2 style="text-align:center;">\u8BA9\u6211\u770B\u770B\u4F60\u5DF2\u7ECF\u77E5\u9053\u591A\u5C11\uFF01</h2>
         <p style="color:var(--text-secondary);text-align:center;">10\u9053\u9898\uFF0C\u5E2E\u4F60\u627E\u5230\u6700\u5408\u9002\u7684\u8D77\u70B9</p>
@@ -213,7 +213,7 @@ Daily limit: 78% remaining`},{id:"review",command:"/review",zhName:"\u4EE3\u7801
       </div>
     `;let i=e.querySelector("#glossary-search");i?.addEventListener("input",()=>{t=i.value,C("keystroke"),n()}),i?.focus()}n()}U();function me(e){let t=y.getDueReviewItems(10),n=0,l=0;if(t.length===0){e.innerHTML=`
       ${w("\u590D\u4E60 Review",!0)}
-      <div class="screen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-lg);">
+      <div class="screen" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-lg);padding-top:calc(var(--header-height) + var(--space-2xl));">
         ${S("correctAnswer")}
         <h2 style="text-align:center;">\u6CA1\u6709\u9700\u8981\u590D\u4E60\u7684\u5185\u5BB9\uFF01</h2>
         <p style="color:var(--text-secondary);text-align:center;">No items due for review. Keep learning!</p>
