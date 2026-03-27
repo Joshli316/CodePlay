@@ -39,9 +39,7 @@ export function renderTrivia(container: HTMLElement, worldId: number, levelIndex
   const TOTAL = 10;
   const TIME_PER_QUESTION = 15;
 
-  let questions: TriviaQuestion[] = [];
-
-  questions = generateQuestionsFromVocab(worldId, TOTAL);
+  const questions = generateQuestionsFromVocab(worldId, TOTAL);
 
   let currentIndex = 0;
   let correctCount = 0;

@@ -50,7 +50,7 @@ export function renderFlashMatch(container: HTMLElement, worldId: number, levelI
             </div>
           </div>
         </div>
-        <div class="game-footer" id="action-btns" style="visibility:hidden;">
+        <div class="game-footer" id="action-btns" style="display:none;">
           <div style="display:flex;gap:var(--space-sm);">
             <button class="btn btn-danger" id="btn-review" style="flex:1;">✗ 复习 Review</button>
             <button class="btn btn-primary" id="btn-know" style="flex:1;">✓ 认识 Know it</button>
@@ -66,7 +66,7 @@ export function renderFlashMatch(container: HTMLElement, worldId: number, levelI
       if (!card.classList.contains('flipped')) {
         card.classList.add('flipped');
         playSound('cardFlip');
-        actionBtns.style.visibility = 'visible';
+        actionBtns.style.display = 'flex';
       }
     });
 

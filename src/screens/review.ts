@@ -5,7 +5,7 @@ import { playSound } from '../components/audio';
 import { vocabulary } from '../data/vocabulary';
 import { commands } from '../data/commands';
 import { router } from '../router';
-import { setupQuizOptions } from '../utils';
+import { setupQuizOptions, shuffle } from '../utils';
 
 export function renderReview(container: HTMLElement) {
   const dueItems = state.getDueReviewItems(10);
@@ -43,8 +43,8 @@ export function renderReview(container: HTMLElement) {
       if (v) {
         questionHtml = `<div class="game-question">${v.en}</div><div class="game-question-sub">这个英文术语的中文是什么？</div>`;
         correctAnswer = v.zh;
-        const wrongOpts = vocabulary.filter(x => x.id !== v.id).sort(() => Math.random() - 0.5).slice(0, 3).map(x => x.zh);
-        options = [...wrongOpts, v.zh].sort(() => Math.random() - 0.5);
+        const wrongOpts = shuffle(vocabulary.filter(x => x.id !== v.id)).slice(0, 3).map(x => x.zh);
+        options = shuffle([...wrongOpts, v.zh]);
         correctIndex = options.indexOf(v.zh);
       }
     } else if (item.type === 'command') {
@@ -52,7 +52,7 @@ export function renderReview(container: HTMLElement) {
       if (c) {
         questionHtml = `<div class="game-question">${c.scenario}</div><div class="game-question-sub">选择正确的命令</div>`;
         correctAnswer = c.command;
-        options = [c.command, ...c.wrongChoices.slice(0, 3)].sort(() => Math.random() - 0.5);
+        options = shuffle([c.command, ...c.wrongChoices.slice(0, 3)]);
         correctIndex = options.indexOf(c.command);
       }
     }

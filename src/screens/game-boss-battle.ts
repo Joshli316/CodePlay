@@ -200,6 +200,7 @@ export function renderBossBattle(container: HTMLElement, worldId: number, levelI
 
     container.querySelector('#submit-explain')?.addEventListener('click', () => {
       const input = container.querySelector('#explanation-input') as HTMLInputElement;
+      if (!input?.value.trim()) { input?.focus(); return; }
       const explanation = (input?.value || '').toLowerCase();
 
       // Score command

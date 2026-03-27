@@ -135,9 +135,9 @@
   background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: 1px solid var(--text-muted);
-  cursor: grab;
+  cursor: pointer;
   user-select: none;
-  touch-action: none;
+  touch-action: auto;
   font-family: var(--font-mono);
   font-size: var(--text-sm);
 }
@@ -388,7 +388,7 @@
   cursor: pointer;
   border: 1px solid var(--text-muted);
   transition: all var(--transition-fast);
-  min-height: 44px;
+  min-height: var(--tap-target);
   display: flex;
   align-items: center;
 }

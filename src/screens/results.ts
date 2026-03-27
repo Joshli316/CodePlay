@@ -40,7 +40,7 @@ export function renderResults(container: HTMLElement, params: {
   checkBadge('prompt-sage', isPerfect && gameType === 'prompt-builder');
   checkBadge('interview-ready', gameType === 'boss-battle' && passed);
   checkBadge('completionist', [1, 2, 3, 4].every(w => state.getWorldCompletion(w) >= 100));
-  checkBadge('speed-demon', isPerfect); // simplified
+  checkBadge('speed-demon', isPerfect && gameType === 'trivia');
   checkBadge('practice-master', state.getStreak().current >= 7);
   checkBadge('unstoppable', state.getStreak().current >= 21);
 

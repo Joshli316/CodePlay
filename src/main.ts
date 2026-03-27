@@ -63,6 +63,10 @@ router.addRoute('/game/:type/:worldId/:levelId', (params) => {
   const levelIndex = parseInt(params.levelId);
   const renderer = GAME_RENDERERS[gameType];
   if (renderer) {
+    if (!state.isLevelUnlocked(worldId, levelIndex)) {
+      router.navigate(`/world/${worldId}`);
+      return;
+    }
     renderer(app, worldId, levelIndex);
   } else {
     router.navigate('/');

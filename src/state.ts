@@ -72,7 +72,7 @@ class StateManager {
     } catch (e) {
       console.warn('Failed to load state:', e);
     }
-    return { ...DEFAULT_STATE, worlds: { ...DEFAULT_STATE.worlds } };
+    return { ...DEFAULT_STATE, worlds: createEmptyWorlds() };
   }
 
   private save() {
@@ -147,7 +147,7 @@ class StateManager {
     const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
     if (last === yesterday) {
       this.state.streak.current++;
-    } else if (last !== today) {
+    } else {
       this.state.streak.current = 1;
     }
     this.state.streak.longest = Math.max(this.state.streak.longest, this.state.streak.current);

@@ -47,8 +47,8 @@ class Router {
           return;
         }
       }
-      // Default: go home
-      this.navigate('/');
+      // Default: go home (guard against loop if '/' itself doesn't match)
+      if (hash !== '#/') this.navigate('/');
     };
 
     window.addEventListener('hashchange', handleRoute);

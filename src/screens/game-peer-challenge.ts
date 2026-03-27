@@ -27,7 +27,8 @@ function decodeChallenge(hash: string): { questionIds: string[]; peerScore: numb
     if (!raw) return null;
     const data = JSON.parse(atob(raw));
     if (!Array.isArray(data.q) || typeof data.s !== 'number' || !isFinite(data.s)) return null;
-    return { questionIds: data.q.filter((id: unknown) => typeof id === 'string'), peerScore: Math.max(0, Math.floor(data.s)) };
+    if (data.q.length > 20) return null;
+    return { questionIds: data.q.filter((id: unknown) => typeof id === 'string'), peerScore: Math.min(Math.max(0, Math.floor(data.s)), data.q.length) };
   } catch {
     return null;
   }
@@ -119,9 +120,6 @@ export function renderPeerChallenge(container: HTMLElement, worldId: number, lev
     const shareLink = `${baseUrl}#peer=${encoded}`;
     const pct = Math.round((correctCount / questions.length) * 100);
 
-    // Award badge
-    state.addBadge('sharing-caring');
-
     // Determine comparison text
     let comparisonHtml = '';
     if (peerData) {
@@ -204,6 +202,7 @@ export function renderPeerChallenge(container: HTMLElement, worldId: number, lev
       const feedbackEl = container.querySelector('#copy-feedback') as HTMLElement;
 
       navigator.clipboard.writeText(input.value).then(() => {
+        state.addBadge('sharing-caring');
         feedbackEl.style.display = 'block';
         feedbackEl.textContent = '已复制！ Copied!';
         playSound('correct');
