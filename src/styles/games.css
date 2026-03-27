@@ -342,6 +342,7 @@
   margin: var(--space-md) 0;
   border: 2px solid var(--gold);
   width: 100%;
+  box-shadow: var(--shadow-lg);
 }
 
 /* Workflow slots */
@@ -409,23 +410,10 @@
   opacity: 0.4;
 }
 
-/* Editable prompt area */
-.editable-prompt {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  padding: var(--space-md);
-  background: var(--bg-card);
-  border-radius: var(--radius-md);
-  line-height: 1.8;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-}
-
 /* === Mobile Responsive === */
 
-/* Small phones — memory grid 3 columns */
-@media (max-width: 380px) {
+/* Small-medium phones — memory grid 3 columns */
+@media (max-width: 414px) {
   .memory-grid {
     grid-template-columns: repeat(3, 1fr);
   }

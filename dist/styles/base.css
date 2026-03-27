@@ -11,6 +11,7 @@ html {
 
 body {
   font-family: var(--font-sans);
+  line-height: 1.6;
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
@@ -32,7 +33,8 @@ body {
 
 a {
   color: var(--teal);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-style: dotted;
 }
 
 button {
@@ -74,7 +76,12 @@ img {
 .screen {
   padding: var(--header-height) var(--space-md) var(--space-lg);
   min-height: 100vh;
-  animation: fadeIn var(--transition-normal);
+  animation: screenEnter var(--transition-normal) ease-out;
+}
+
+@keyframes screenEnter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {

@@ -2,6 +2,7 @@ import { renderHeader } from '../components/header';
 import { vocabulary } from '../data/vocabulary';
 import { state } from '../state';
 import { playSound } from '../components/audio';
+import { iconSearch, iconLock, iconBook } from '../components/icons';
 
 export function renderGlossary(container: HTMLElement) {
   let searchTerm = '';
@@ -21,13 +22,13 @@ export function renderGlossary(container: HTMLElement) {
         <input type="text" class="search-input" id="glossary-search" placeholder="搜索 Search (English, 拼音, 中文)" value="${searchTerm}">
         <p style="color:var(--text-muted);font-size:var(--text-xs);margin:var(--space-sm) 0;">${filtered.length} 个词条</p>
         <div style="display:flex;flex-direction:column;gap:var(--space-sm);margin-top:var(--space-sm);">
-          ${filtered.length === 0 ? '<div style="text-align:center;color:var(--text-muted);padding:var(--space-xl) 0;">没有找到匹配的词条 No matching terms found</div>' : ''}
+          ${filtered.length === 0 ? `<div class="empty-state"><div class="empty-state-icon">${iconSearch('xl')}</div><div class="empty-state-title">没有找到匹配的词条</div><div class="empty-state-text">No matching terms found</div></div>` : ''}
           ${filtered.map(v => {
             const worldUnlocked = state.isWorldUnlocked(v.world);
             return `
               <div class="card" style="${!worldUnlocked ? 'opacity:0.5;' : ''}">
                 <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                  <div style="font-weight:700;color:var(--teal);font-size:var(--text-lg);">${worldUnlocked ? v.en : '???'}</div>
+                  <div style="font-weight:700;color:var(--teal);font-size:var(--text-lg);">${worldUnlocked ? v.en : `${iconLock('sm')} ???`}</div>
                   <span style="font-size:var(--text-xs);color:var(--text-muted);background:var(--bg-secondary);padding:2px 8px;border-radius:var(--radius-full);">W${v.world}</span>
                 </div>
                 ${worldUnlocked ? `

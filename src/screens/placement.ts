@@ -5,6 +5,7 @@ import { playSound } from '../components/audio';
 import { placementQuestions } from '../data/quizzes';
 import { router } from '../router';
 import { setupQuizOptions } from '../utils';
+import { iconArrowRight, iconPlay } from '../components/icons';
 
 export function renderPlacement(container: HTMLElement) {
   let currentQ = 0;
@@ -17,7 +18,7 @@ export function renderPlacement(container: HTMLElement) {
         ${renderMascot('firstLogin')}
         <h2 style="text-align:center;">让我看看你已经知道多少！</h2>
         <p style="color:var(--text-secondary);text-align:center;">10道题，帮你找到最合适的起点</p>
-        <button class="btn btn-primary btn-block" id="start-placement">开始测试 Start Test</button>
+        <button class="btn btn-primary btn-block" id="start-placement">${iconPlay('sm')} 开始测试 Start Test</button>
         <button class="btn btn-secondary btn-block" id="skip-placement" style="font-size:var(--text-sm);">我是新手，从头开始 I'm a beginner</button>
       </div>
     `;
@@ -102,7 +103,7 @@ export function renderPlacement(container: HTMLElement) {
           <div style="font-size:var(--text-4xl);font-weight:700;color:var(--teal);">${score}/10</div>
           <p style="color:var(--text-secondary);margin-top:var(--space-sm);">${message}</p>
         </div>
-        <button class="btn btn-primary btn-block" id="go-home">开始学习 Start Learning →</button>
+        <button class="btn btn-primary btn-block" id="go-home">开始学习 Start Learning ${iconArrowRight('sm')}</button>
       </div>
     `;
     container.querySelector('#go-home')?.addEventListener('click', () => router.navigate('/'));

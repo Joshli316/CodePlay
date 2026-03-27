@@ -8,6 +8,7 @@ import { badges } from '../data/badges';
 import { WORLDS } from '../data/worlds';
 import { shuffle, setupQuizOptions, renderFeedback, escapeHtml } from '../utils';
 import { router } from '../router';
+import { iconGraduationCap, iconSmartphone, iconBriefcase, iconHome, iconRefresh } from '../components/icons';
 
 const TOTAL_QUESTIONS = 20;
 
@@ -135,8 +136,8 @@ function showFailScreen(container: HTMLElement, score: number, total: number, wo
         </div>
       </div>
       <div class="game-footer">
-        <button class="btn btn-primary btn-block" id="retry">再试一次 Retry</button>
-        <button class="btn btn-secondary btn-block" id="go-home">返回首页 Home</button>
+        <button class="btn btn-primary btn-block" id="retry">${iconRefresh('sm')} 再试一次 Retry</button>
+        <button class="btn btn-secondary btn-block" id="go-home">${iconHome('sm')} 返回首页 Home</button>
       </div>
     </div>
   `;
@@ -181,32 +182,32 @@ function showCertificateScreen(container: HTMLElement, score: number, total: num
 
         <!-- Certificate preview -->
         <div class="certificate-preview" id="cert-preview">
-          <div style="font-size:12px;color:#666;margin-bottom:8px;">🎓 CodePlay 码玩</div>
-          <div style="font-size:20px;font-weight:700;color:#0a1628;" id="cert-name-display">${escapeHtml(savedName) || '你的名字'}</div>
-          <div style="font-size:12px;color:#444;margin-top:4px;">
+          <div style="font-size:12px;color:rgba(255,200,87,0.8);margin-bottom:8px;">${iconGraduationCap('sm')} CodePlay 码玩</div>
+          <div style="font-size:20px;font-weight:700;color:#ffffff;" id="cert-name-display">${escapeHtml(savedName) || '你的名字'}</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:4px;">
             已完成 CodePlay 码玩 全部课程
           </div>
-          <div style="font-size:11px;color:#666;margin-top:8px;">
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px;">
             ${worldIcons}
           </div>
-          <div style="font-size:11px;color:#666;margin-top:4px;">
+          <div style="font-size:11px;color:var(--teal);margin-top:4px;">
             考试成绩 ${pct}% · ${totalLevels} 关卡 · ${earnedBadges.length} 枚徽章
           </div>
-          <div style="font-size:10px;color:#999;margin-top:8px;">${dateStr}</div>
-          <div style="font-size:10px;color:#aaa;margin-top:2px;">学会用AI，赢得未来</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:8px;">${dateStr}</div>
+          <div style="font-size:10px;color:var(--gold);margin-top:2px;">学会用AI，赢得未来</div>
         </div>
 
         <!-- Download buttons -->
         <div style="display:flex;gap:var(--space-sm);width:100%;margin-top:var(--space-md);">
           <button class="btn btn-primary" id="dl-wechat" style="flex:1;">
-            📱 微信卡片<br><span style="font-size:var(--text-xs);">1080×1080</span>
+            ${iconSmartphone('sm')} 微信卡片<br><span style="font-size:var(--text-xs);">1080×1080</span>
           </button>
           <button class="btn btn-secondary" id="dl-linkedin" style="flex:1;">
-            💼 LinkedIn<br><span style="font-size:var(--text-xs);">1200×628</span>
+            ${iconBriefcase('sm')} LinkedIn<br><span style="font-size:var(--text-xs);">1200×628</span>
           </button>
         </div>
 
-        <button class="btn btn-secondary btn-block" id="go-home" style="margin-top:var(--space-sm);">返回首页 Home</button>
+        <button class="btn btn-secondary btn-block" id="go-home" style="margin-top:var(--space-sm);">${iconHome('sm')} 返回首页 Home</button>
       </div>
     </div>
   `;

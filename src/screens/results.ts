@@ -6,6 +6,7 @@ import { showBadgeToast } from '../components/badge';
 import { playSound } from '../components/audio';
 import { badges } from '../data/badges';
 import { router } from '../router';
+import { iconStar, iconHome, iconRefresh, iconArrowRight } from '../components/icons';
 
 export function renderResults(container: HTMLElement, params: {
   worldId: number;
@@ -65,17 +66,17 @@ export function renderResults(container: HTMLElement, params: {
     <div class="screen" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-lg);padding-top:calc(var(--header-height) + var(--space-xl));">
       ${renderMascot(mascotTrigger)}
       <div style="text-align:center;">
-        <div class="stars" style="justify-content:center;font-size:var(--text-3xl);margin-bottom:var(--space-md);">
-          ${[1, 2, 3].map(s => `<span class="star ${s <= stars ? 'earned' : ''}" style="animation:${s <= stars ? `bounceIn 0.3s ${s * 0.2}s both` : 'none'}">★</span>`).join('')}
+        <div style="display:flex;justify-content:center;gap:var(--space-sm);margin-bottom:var(--space-md);">
+          ${[1, 2, 3].map(s => `<span style="display:inline-flex;animation:${s <= stars ? `bounceIn 0.3s ${s * 0.2}s both` : 'none'}">${iconStar(s <= stars, 'xl', s <= stars ? 'var(--gold)' : 'var(--text-muted)')}</span>`).join('')}
         </div>
         <div style="font-size:var(--text-4xl);font-weight:700;color:${isPerfect ? 'var(--gold)' : 'var(--teal)'};">${pct}%</div>
         <p style="color:var(--text-secondary);margin-top:var(--space-xs);">${score}/${total} 正确</p>
         <p style="color:var(--text-secondary);font-size:var(--text-sm);margin-top:var(--space-xs);">+${pct} XP</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:var(--space-sm);width:100%;">
-        ${passed ? `<button class="btn btn-primary btn-block" id="next-level">下一关 Next Level →</button>` : ''}
-        <button class="btn btn-secondary btn-block" id="retry">再试一次 Retry</button>
-        <button class="btn btn-secondary btn-block" id="go-home">返回首页 Home</button>
+        ${passed ? `<button class="btn btn-primary btn-block" id="next-level">下一关 Next Level ${iconArrowRight('sm')}</button>` : ''}
+        <button class="btn btn-secondary btn-block" id="retry">${iconRefresh('sm')} 再试一次 Retry</button>
+        <button class="btn btn-secondary btn-block" id="go-home">${iconHome('sm')} 返回首页 Home</button>
       </div>
     </div>
   `;
