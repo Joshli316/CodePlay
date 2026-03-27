@@ -17,6 +17,7 @@
   background: var(--teal);
   color: var(--bg-primary);
 }
+.btn-primary:hover { background: var(--teal-dim); }
 .btn-primary:active { background: var(--teal-dim); transform: scale(0.97); }
 
 .btn-secondary {
@@ -24,12 +25,14 @@
   color: var(--text-primary);
   border: 1px solid var(--text-muted);
 }
+.btn-secondary:hover { background: var(--bg-card-hover); }
 .btn-secondary:active { background: var(--bg-card-hover); }
 
 .btn-gold {
   background: var(--gold);
   color: var(--bg-primary);
 }
+.btn-gold:hover { background: var(--gold-dim); }
 .btn-gold:active { background: var(--gold-dim); transform: scale(0.97); }
 
 .btn-danger {
@@ -53,6 +56,10 @@
   padding: var(--space-md);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-fast);
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
 }
 
 .card:active {
@@ -207,6 +214,7 @@
   transition: all var(--transition-fast);
 }
 
+.option-btn:hover { border-color: var(--text-muted); background: var(--bg-card-hover); }
 .option-btn:active { border-color: var(--teal); }
 .option-btn.correct { border-color: var(--green); background: rgba(0, 212, 170, 0.1); }
 .option-btn.wrong { border-color: var(--red); background: rgba(255, 107, 107, 0.1); animation: shake 0.3s; }

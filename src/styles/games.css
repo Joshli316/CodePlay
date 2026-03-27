@@ -388,7 +388,7 @@
   cursor: pointer;
   border: 1px solid var(--text-muted);
   transition: all var(--transition-fast);
-  min-height: 36px;
+  min-height: 44px;
   display: flex;
   align-items: center;
 }

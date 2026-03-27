@@ -73,7 +73,11 @@ class StateManager {
   }
 
   private save() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
+    } catch {
+      // QuotaExceededError in private browsing or full storage — silent fail
+    }
   }
 
   get(): GameState {
